@@ -5,9 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ARScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 0
+    path: Assets/Scenes/AR_TEST.Scene01.unity
+    guid: 95bf406288695a34cbeeb7138ae27fd3
+  - enabled: 1
+    path: Assets/Scenes/TEST_ARScene_Nyx.unity
+    guid: 3937cf17cc9427f46893555bc026e36c
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 8bb34bb8e880aeb44ab3248048177d4f, type: 2}
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: 107895e3f592f104899756689ecd66d6, type: 2}

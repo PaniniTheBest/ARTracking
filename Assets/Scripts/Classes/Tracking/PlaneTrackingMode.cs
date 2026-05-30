@@ -70,5 +70,14 @@ public class PlaneTrackingMode : MonoBehaviour, IARTrackingMode
                 _raycastHits[0].pose.position,
                 _raycastHits[0].pose.rotation);
         }
+
+        if (Input.touchCount > 0)
+        {
+            // Log only the first frame the finger hits the screen
+            if (touch.phase == TouchPhase.Began)
+            {
+                Debug.Log($"[TAP DETECTED] Position: {touch.screen.position}");
+            }
+        }
     }
 }
