@@ -2,10 +2,17 @@ using UnityEngine;
 
 public class ColorHandler : MonoBehaviour
 {
+    [SerializeField] private float intensity = 2.5f;
     [SerializeField] public Color changerColor;
-    [SerializeField] private MeshRenderer colorRenderer;
+    [SerializeField] private Renderer colorRenderer;
+
+    private void Start()
+    {
+        changerColor *= intensity;
+        colorRenderer.material.EnableKeyword("_EMISSION");
+    }
     private void Update()
     {
-        colorRenderer.material.color = changerColor;
+        colorRenderer.material.SetColor("_EmissionColor", changerColor);
     }
 }
