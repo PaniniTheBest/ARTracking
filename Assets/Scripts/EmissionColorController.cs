@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ColorHandler : MonoBehaviour
+public class EmissionColorController : MonoBehaviour
 {
     [SerializeField] private float intensity = 2.5f;
     [SerializeField] public Color changerColor;
