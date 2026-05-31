@@ -5,12 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/ARScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: c1c0ef13738d2fe4d90912b38d78f213
   - enabled: 0
     path: Assets/Scenes/AR_TEST.Scene01.unity
     guid: 95bf406288695a34cbeeb7138ae27fd3
+  - enabled: 1
+    path: Assets/Scenes/AR_TEST.MENUDO.unity
+    guid: 91a0ebb716b96c34cbb073ee9d25dfe9
   - enabled: 1
     path: Assets/Scenes/TEST_ARScene_Nyx.unity
     guid: 3937cf17cc9427f46893555bc026e36c
