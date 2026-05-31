@@ -18,7 +18,6 @@ public class ModelImageChanger : MonoBehaviour
 
         // Advance to the next index and loop back to 0 if at the end
         currentIndex = (currentIndex + 1) % imageList.Length;
-
         // Assign the new sprite
         targetImage.sprite = imageList[currentIndex];
     }

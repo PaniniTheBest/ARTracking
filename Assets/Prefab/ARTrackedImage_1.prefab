@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5272026693632439661}
   - component: {fileID: 6360199158321235316}
-  - component: {fileID: 2793279083177659743}
   m_Layer: 6
   m_Name: ARTrackedImage_1
   m_TagString: Untagged
@@ -26,14 +25,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2159117000730916740}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6327411878500714108}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &6360199158321235316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47,21 +46,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.XR.ARFoundation::UnityEngine.XR.ARFoundation.ARTrackedImage
   m_DestroyOnRemoval: 1
---- !u!114 &2793279083177659743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2159117000730916740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30c8d064eb122244fb9f9024efaef385, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EmissionColorController
-  intensity: 1.5
-  changerColor: {r: 0.9339623, g: 0.5771182, b: 0.85816014, a: 0}
-  colorRenderer: {fileID: 88387836563309906}
 --- !u!1 &6145219291629227642
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,12 +241,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7252557991237821940, guid: 62d2a7f5da1084f6994dcbca19a2ddb2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1672704944466963256}
+    - targetCorrespondingSourceObject: {fileID: 9126132746680879656, guid: 62d2a7f5da1084f6994dcbca19a2ddb2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7846874734562319002}
   m_SourcePrefab: {fileID: 100100000, guid: 62d2a7f5da1084f6994dcbca19a2ddb2, type: 3}
---- !u!137 &88387836563309906 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 8017796919361815997, guid: 62d2a7f5da1084f6994dcbca19a2ddb2, type: 3}
-  m_PrefabInstance: {fileID: 7962060218754007279}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &113566529564245921 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8065264950435053390, guid: 62d2a7f5da1084f6994dcbca19a2ddb2, type: 3}
@@ -295,3 +277,31 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &1213828903746095815 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9126132746680879656, guid: 62d2a7f5da1084f6994dcbca19a2ddb2, type: 3}
+  m_PrefabInstance: {fileID: 7962060218754007279}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &7846874734562319002
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213828903746095815}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.41
+  m_Height: 1.4545069
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.6, z: -0.02}
