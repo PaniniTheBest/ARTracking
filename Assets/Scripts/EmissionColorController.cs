@@ -11,8 +11,12 @@ public class EmissionColorController : MonoBehaviour
         changerColor *= intensity;
         colorRenderer.material.EnableKeyword("_EMISSION");
     }
-    private void Update()
+    private void Update() 
     {
-        colorRenderer.material.SetColor("_EmissionColor", changerColor);
+        if (colorRenderer == null) return;
+        else 
+        {
+            colorRenderer.material.SetColor("_EmissionColor", changerColor);
+        }
     }
 }

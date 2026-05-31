@@ -42,7 +42,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6615736349919950197}
   - component: {fileID: 6794058733085323586}
-  - component: {fileID: 9030629766261086895}
   m_Layer: 0
   m_Name: ARTrackedImage_2 1
   m_TagString: Untagged
@@ -79,21 +78,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.XR.ARFoundation::UnityEngine.XR.ARFoundation.ARTrackedImage
   m_DestroyOnRemoval: 1
---- !u!114 &9030629766261086895
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3562065703971464621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30c8d064eb122244fb9f9024efaef385, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ColorHandler
-  intensity: 1.5
-  changerColor: {r: 1, g: 0, b: 0, a: 0}
-  colorRenderer: {fileID: 5460749642306487693}
 --- !u!1 &5821050601259836504
 GameObject:
   m_ObjectHideFlags: 0

@@ -26,6 +26,11 @@ public class PlaneTrackingMode : MonoBehaviour, IARTrackingMode
 
     private GameObject _selectedObject;
 
+    private int objectLayer;
+    private void Start()
+    {
+        objectLayer = LayerMask.NameToLayer("Object");
+    }
     public void Initialize()
     {
         //throw new System.NotImplementedException();
@@ -75,6 +80,12 @@ public class PlaneTrackingMode : MonoBehaviour, IARTrackingMode
             return;
         }
 
+        if (TrySelectObject(touch.screenPosition))
+        {
+            Debug.Log("TrySelectObject(touch.screenPosition)");
+            return; // tapped an object — don't spawn anything
+        }
+
 
         // We will check if the point in the screen that we touched actually has an ARPlane
         if (_raycastManager.Raycast(
@@ -93,21 +104,72 @@ public class PlaneTrackingMode : MonoBehaviour, IARTrackingMode
         {
             Debug.Log("[AR] Raycast did not hit any plane");
         }
+    }
+    private bool TrySelectObject(Vector2 screenPosition)
+    {
+        // Cast a ray from the camera through the screen position into 3D space
+        Ray ray = Camera.main.ScreenPointToRay(screenPosition);
 
-        if (_raycastManager.Raycast(
-            touch.screenPosition, // cast a ray from the position of the touch
-            _raycastHits, // store the data of whatever ARRaycastHit information we got
-            TrackableType.BoundingBox)) // filter whatever trackable type we want
+        if (Physics.Raycast(ray, out RaycastHit target))
         {
-            Debug.Log("Tapping on Object");
-            // If we hit a plane, spawn it where we clicked
-            //var spawnedObject = Instantiate(
-            //    _prefabToSpawnFromPlane,
-            //    _raycastHits[0].pose.position,
-            //    _raycastHits[0].pose.rotation);
+            GameObject tappedObject = target.collider.gameObject;
+
+            // Ignore AR planes
+            if (tappedObject.layer != objectLayer) return false;
+
+            // Check if we tapped the currently selected object
+            if (_selectedObject == tappedObject && tappedObject.layer == objectLayer)
+            {
+                // Tapping the selected object again deletes it
+                Destroy(_selectedObject);
+                _selectedObject = null;
+                Debug.Log($"Deleting selected object {_selectedObject.name}");
+            }
+            else if(tappedObject.layer == objectLayer)
+            {
+                // Deselect the previous object
+                DeselectObject(_selectedObject);
+                // Select the new object
+                _selectedObject = tappedObject;
+                SelectObject(_selectedObject);
+                Debug.Log($"Object selected {_selectedObject.name}");
+            }
+            return true;
+        }
+        // Tapped empty space — deselect current object
+        DeselectObject(_selectedObject);
+        return false;
+    }
+    private void SelectObject(GameObject targetObject)
+    {
+        Debug.Log($"SelectObject(GameObject targetObject) is TAPPED");
+
+        float newColorIntensity = 2.5f;
+        if (targetObject.TryGetComponent<EmissionColorController>(out EmissionColorController targetObjectColor))
+        {
+            Debug.Log($"SelectObject(GameObject targetObject) is changing color");
+            targetObjectColor.intensity = newColorIntensity;
+            targetObjectColor.changerColor = Color.green;
+        }
+        else
+        {
+            Debug.Log($" EmissionColorController is Null : {targetObject.name}");
+            return; 
+        }
+    }
+    private void DeselectObject(GameObject targetObject)
+    {
+        if (_selectedObject == null) return;
+
+        _selectedObject.TryGetComponent<EmissionColorController>(out EmissionColorController targetObjectColor);
+        if (_selectedObject == null) return;           
+        else
+        {
+            targetObjectColor.changerColor *= 0.5f; // restore default highlight
+            targetObjectColor.changerColor = Color.red;
         }
 
-
-
+        _selectedObject = null;
     }
+
 }
