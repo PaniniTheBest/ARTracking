@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
@@ -23,20 +24,30 @@ public class PlaneTrackingMode : MonoBehaviour, IARTrackingMode
 
     public ARTrackingMode Mode => ARTrackingMode.PlaneTracking;
 
+    private GameObject _selectedObject;
+
     public void Initialize()
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
+        DisableMode();
+
     }
 
     public void EnableMode()
     {
         EnhancedTouchSupport.Enable();
+        _planeManager.enabled = true;
+        Debug.Log("_planeManager.enabled = true;");
     }
 
     public void DisableMode()
     {
         EnhancedTouchSupport.Disable();
+        _planeManager.enabled = false;
+        Debug.Log("_planeManager.enabled = false;");
+
     }
+
 
     public void UpdateMode()
     {
@@ -57,6 +68,14 @@ public class PlaneTrackingMode : MonoBehaviour, IARTrackingMode
         }
         Debug.Log("[AR] Touch detected");
 
+
+        if (EventSystem.current.IsPointerOverGameObject(touch.touchId))
+        {
+            Debug.Log("[AR] Touch blocked by UI");
+            return;
+        }
+
+
         // We will check if the point in the screen that we touched actually has an ARPlane
         if (_raycastManager.Raycast(
             touch.screenPosition, // cast a ray from the position of the touch
@@ -70,14 +89,25 @@ public class PlaneTrackingMode : MonoBehaviour, IARTrackingMode
                 _raycastHits[0].pose.position,
                 _raycastHits[0].pose.rotation);
         }
-
-        if (Input.touchCount > 0)
+        else
         {
-            // Log only the first frame the finger hits the screen
-            if (touch.phase == TouchPhase.Began)
-            {
-                Debug.Log($"[TAP DETECTED] Position: {touch.screen.position}");
-            }
+            Debug.Log("[AR] Raycast did not hit any plane");
         }
+
+        if (_raycastManager.Raycast(
+            touch.screenPosition, // cast a ray from the position of the touch
+            _raycastHits, // store the data of whatever ARRaycastHit information we got
+            TrackableType.BoundingBox)) // filter whatever trackable type we want
+        {
+            Debug.Log("Tapping on Object");
+            // If we hit a plane, spawn it where we clicked
+            //var spawnedObject = Instantiate(
+            //    _prefabToSpawnFromPlane,
+            //    _raycastHits[0].pose.position,
+            //    _raycastHits[0].pose.rotation);
+        }
+
+
+
     }
 }

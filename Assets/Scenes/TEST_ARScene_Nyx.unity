@@ -569,6 +569,7 @@ MonoBehaviour:
   - {fileID: 591953225}
   - {fileID: 591953224}
   - {fileID: 591953218}
+  _planeTrackingMode: {fileID: 591953225}
 --- !u!114 &591953222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -629,7 +630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlaneTrackingMode
   _planeManager: {fileID: 591953222}
-  _prefabToSpawnFromPlane: {fileID: 2159117000730916740, guid: bc2c8e81c41fe584bb9442b1aa71a3a1, type: 3}
+  _prefabToSpawnFromPlane: {fileID: 775535217018772238, guid: 232cdec90a4265740a0e9b548f136644, type: 3}
   _raycastManager: {fileID: 591953223}
 --- !u!1 &631040436
 GameObject:
@@ -728,7 +729,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &817973917
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1486,7 +1487,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

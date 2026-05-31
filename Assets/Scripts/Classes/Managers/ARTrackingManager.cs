@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ARTrackingManager : Singleton<ARTrackingManager>
@@ -14,11 +15,23 @@ public class ARTrackingManager : Singleton<ARTrackingManager>
     // What is the current IARTrackingMode active
     private IARTrackingMode _currentTrackingMode;
 
+    [SerializeField] PlaneTrackingMode _planeTrackingMode;
+
     protected override void Awake()
     {
         base.Awake();
         RegisterModes();
+        _planeTrackingMode.EnableMode();
+
     }
+
+    private void Update()
+    {
+        // Drive the active mode every frame so it can detect touches and other input
+        _planeTrackingMode.UpdateMode(); //Brute force method
+
+    }
+
 
     public void SetMode(ARTrackingMode mode)
     {
@@ -30,7 +43,7 @@ public class ARTrackingManager : Singleton<ARTrackingManager>
 
         // This code will only be reached if target mode is a different mode
         // Disable the current mode
-        _currentTrackingMode.DisableMode();
+        _currentTrackingMode?.DisableMode();
 
         // Enable the target mode
         if (_trackingModes.TryGetValue(mode, out var newMode))
@@ -56,4 +69,10 @@ public class ARTrackingManager : Singleton<ARTrackingManager>
             Debug.Log($"Registered {trackingMode.Mode}");
         }
     }
+    private void OnPlaneTrackingSelected()
+    {
+        Debug.Log("[UI] Plane Tracking button pressed");
+        ARTrackingManager.Instance.SetMode(ARTrackingMode.PlaneTracking);
+    }
+
 }
