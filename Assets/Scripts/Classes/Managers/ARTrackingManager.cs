@@ -67,10 +67,4 @@ public class ARTrackingManager : Singleton<ARTrackingManager>
             Debug.Log($"Registered {trackingMode.Mode}");
         }
     }
-    private void OnPlaneTrackingSelected()
-    {
-        Debug.Log("[UI] Plane Tracking button pressed");
-        ARTrackingManager.Instance.SetMode(ARTrackingMode.PlaneTracking);
-    }
-
 }

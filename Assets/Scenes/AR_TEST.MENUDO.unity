@@ -1170,7 +1170,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 591953217}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 751579cb4011d11419fc52934e395cb1, type: 3}
   m_Name: 
@@ -1234,13 +1234,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 591953217}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f2da566b99e7f0d45b5e9e5c681d43a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlaneTrackingMode
   _planeManager: {fileID: 591953222}
-  _prefabToSpawnFromPlane: {fileID: 0}
+  _prefabToSpawnFromPlane:
+  - {fileID: 0}
+  prefabIndex: 0
+  changedColor: {r: 0.9333334, g: 0.509804, b: 0.9333334, a: 1}
   _raycastManager: {fileID: 591953223}
 --- !u!1 &631040436
 GameObject:

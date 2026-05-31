@@ -9,7 +9,7 @@ public class ModelImageChanger : MonoBehaviour
     public Image targetImage;       // Drag your UI Image component here
     public Sprite[] imageList;      // Drag your multiple Sprites here
 
-    private int currentIndex = 0;
+    public int currentIndex = 0;
 
     // Call this method via a UI Button OnClick() event
     public void ShowNextImage()
@@ -20,5 +20,6 @@ public class ModelImageChanger : MonoBehaviour
         currentIndex = (currentIndex + 1) % imageList.Length;
         // Assign the new sprite
         targetImage.sprite = imageList[currentIndex];
+        Debug.Log($"current Index : {currentIndex}");
     }
 }

@@ -16,6 +16,10 @@ public class PlaneTrackingMode : MonoBehaviour, IARTrackingMode
     private GameObject[] _prefabToSpawnFromPlane;
     public int prefabIndex = 0;
 
+    [SerializeField] private ModelImageChanger currentIndex;
+    private Color originalColor;
+    public Color changedColor = Color.violet;
+
     [SerializeField]
     private ARRaycastManager _raycastManager;
 
@@ -28,6 +32,8 @@ public class PlaneTrackingMode : MonoBehaviour, IARTrackingMode
     private GameObject _selectedObject;
 
     private int objectLayer;
+
+
     private void Start()
     {
         objectLayer = LayerMask.NameToLayer("Object");
@@ -107,11 +113,11 @@ public class PlaneTrackingMode : MonoBehaviour, IARTrackingMode
             Debug.Log("[AR] Trying to spawn object");
             // If we hit a plane, spawn it where we clicked
             var spawnedObject = Instantiate(
-                _prefabToSpawnFromPlane[prefabIndex],
+                _prefabToSpawnFromPlane[currentIndex.currentIndex],
                 _raycastHits[0].pose.position,
                 _raycastHits[0].pose.rotation);
 
-            prefabIndex = (prefabIndex + 1) % _prefabToSpawnFromPlane.Length;
+            //prefabIndex = (prefabIndex + 1) % _prefabToSpawnFromPlane.Length;
             Debug.Log(prefabIndex);
         }
         else
@@ -160,17 +166,19 @@ public class PlaneTrackingMode : MonoBehaviour, IARTrackingMode
         Debug.Log($"SelectObject(GameObject targetObject) is TAPPED");
 
         float newColorIntensity = 2.5f;
-        if (targetObject.TryGetComponent<EmissionColorController>(out EmissionColorController targetObjectColor01))
+        if (targetObject.TryGetComponent<EmissionColorController>(out EmissionColorController targetObjectColor01) && targetObjectColor01!= null)
         {
-            Debug.Log($"SelectObject(GameObject targetObject) is changing color");
+            originalColor = targetObjectColor01.changerColor;
+            Debug.Log($"SelectObject(GameObject targetObject) is changing color 01 ");
             targetObjectColor01.intensity = newColorIntensity;
-            targetObjectColor01.changerColor = Color.green;
+            targetObjectColor01.changerColor = Color.white;
         }
-        else if(targetObject.TryGetComponent<EmissionColorController>(out EmissionColorController targetObjectColor02))
+        else if(targetObject.TryGetComponent<SkinColorController>(out SkinColorController targetObjectColor02) && targetObjectColor02 != null)
         {
-            Debug.Log($"SelectObject(GameObject targetObject) is changing color");
+            originalColor = targetObjectColor02.changerColor;
+            Debug.Log($"SelectObject(GameObject targetObject) is changing color 02 ");
             targetObjectColor02.intensity = newColorIntensity;
-            targetObjectColor02.changerColor = Color.green;
+            targetObjectColor02.changerColor = Color.white;
         }
         else
         {
@@ -186,13 +194,13 @@ public class PlaneTrackingMode : MonoBehaviour, IARTrackingMode
         else if (_selectedObject.TryGetComponent<EmissionColorController>(out EmissionColorController targetObjectColor) )
         {
             targetObjectColor.changerColor /= newColorIntensity; // restore default highlight
-            targetObjectColor.changerColor = Color.red;
+            targetObjectColor.changerColor = originalColor;
         }
         else if (targetObject.TryGetComponent<EmissionColorController>(out EmissionColorController targetObjectColor02))
         {
             Debug.Log($"SelectObject(GameObject targetObject) is changing color");
             targetObjectColor02.intensity /= newColorIntensity; // restore default highlight
-            targetObjectColor02.changerColor = Color.red;
+            targetObjectColor02.changerColor = originalColor;
         }
         _selectedObject = null;
     }
