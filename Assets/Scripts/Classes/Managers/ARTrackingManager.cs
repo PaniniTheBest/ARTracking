@@ -21,8 +21,6 @@ public class ARTrackingManager : Singleton<ARTrackingManager>
     {
         base.Awake();
         RegisterModes();
-        _planeTrackingMode.EnableMode();
-
     }
 
     private void Update()

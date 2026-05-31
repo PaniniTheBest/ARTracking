@@ -33,9 +33,7 @@ public class PlaneTrackingMode : MonoBehaviour, IARTrackingMode
     }
     public void Initialize()
     {
-        //throw new System.NotImplementedException();
-        DisableMode();
-
+        throw new System.NotImplementedException();
     }
 
     public void EnableMode()
@@ -48,9 +46,21 @@ public class PlaneTrackingMode : MonoBehaviour, IARTrackingMode
     public void DisableMode()
     {
         EnhancedTouchSupport.Disable();
-        _planeManager.enabled = false;
+        _planeManager.enabled = false;// Turn off plane detection
         Debug.Log("_planeManager.enabled = false;");
 
+    }
+    public void ResetPlaneDetection()
+    {    
+        _planeManager.enabled = false;// Turn off plane detection
+
+        // Destroy all currently tracked planes so AR starts fresh
+        foreach (var plane in _planeManager.trackables)       
+            Destroy(plane.gameObject);
+
+        // Turn plane detection back on
+        _planeManager.enabled = true;
+        Debug.Log("[AR] Plane detection reset");
     }
 
 
@@ -121,9 +131,10 @@ public class PlaneTrackingMode : MonoBehaviour, IARTrackingMode
             if (_selectedObject == tappedObject && tappedObject.layer == objectLayer)
             {
                 // Tapping the selected object again deletes it
+                string objectName = _selectedObject.name;
                 Destroy(_selectedObject);
                 _selectedObject = null;
-                Debug.Log($"Deleting selected object {_selectedObject.name}");
+                Debug.Log($"Deleting selected object {objectName}");
             }
             else if(tappedObject.layer == objectLayer)
             {
